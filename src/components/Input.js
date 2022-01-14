@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
   render() {
-    const { datatest, elementId, type, value } = this.props;
+    const { datatest, elementId, onInputChange, type, value, name } = this.props;
     return (
       <div>
         <label htmlFor={ elementId }>
@@ -12,7 +12,9 @@ class Input extends Component {
             id={ elementId }
             type={ type }
             value={ value }
+            name={ name }
             placeholder="Nome"
+            onChange={ onInputChange }
           />
         </label>
       </div>
