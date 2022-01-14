@@ -1,12 +1,13 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Login from './pages/Login';
 
 class App extends React.Component {
   render() {
     return (
-      <>
-        <p>TrybeTunes</p>
-        <p>Começando com tudo VQV! :rocket:</p>
-      </>
+      <BrowserRouter>
+        <Route path="/" component={ Login } />
+      </BrowserRouter>
     );
   }
 }
