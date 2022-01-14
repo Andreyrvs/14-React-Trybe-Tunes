@@ -18,8 +18,8 @@ class App extends React.Component {
           <Route path="/search" component={ Search } />
           <Route path="/favorites" component={ Favorites } />
           <Route path="/profile" component={ Profile } />
-          <Route path="/*" component={ NotFound } />
           <Route exact path="/" component={ Login } />
+          <Route path="/*" component={ NotFound } />
         </Switch>
       </BrowserRouter>
     );
