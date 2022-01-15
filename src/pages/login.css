@@ -1,0 +1,25 @@
+.login-page {
+  align-items: center;
+  display: flex;
+  height: 1024px;
+  justify-content: center;
+  margin-inline: auto;
+  width: 1440px;
+}
+
+.card-container {
+  align-items: center;
+  background-color: aqua;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  height: 314px;
+  justify-content: center;
+  width: 697px;
+}
+
+.form-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

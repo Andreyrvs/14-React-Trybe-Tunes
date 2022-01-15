@@ -60,7 +60,7 @@ describe('2 - Crie um formulário para identificação', () => {
       expect(loginSubmitButton).toBeEnabled();
     });
 
-  it('Será validado se ao clicar no botão habilitado, a função createUser da userAPI é chamada',
+  it.only('Será validado se ao clicar no botão habilitado, a função createUser da userAPI é chamada',
     async () => {
       const spy = jest.spyOn(userAPI, 'createUser');
 

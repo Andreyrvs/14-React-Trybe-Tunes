@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Button extends Component {
   render() {
-    const { type, text, elementId, datatest, value } = this.props;
+    const { type, text, elementId, datatest, value, handleClick } = this.props;
     return (
       <div>
         <label htmlFor={ elementId }>
@@ -12,6 +12,7 @@ class Button extends Component {
             disabled={ value }
             type={ type === 'button' ? 'button' : 'submit' }
             id={ elementId }
+            onClick={ handleClick }
           >
             {text}
           </button>
