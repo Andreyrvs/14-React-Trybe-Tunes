@@ -80,6 +80,7 @@ class Login extends Component {
                   name="loginName"
                   type="text"
                   value={ loginName }
+                  placeHolder="Nome"
                 />
                 <Button
                   datatest="login-submit-button"
