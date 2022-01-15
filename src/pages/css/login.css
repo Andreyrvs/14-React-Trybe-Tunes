@@ -2,10 +2,18 @@
   align-items: center;
   background-color: #fafafa;
   display: flex;
+  flex-direction: column;
+  gap: 104px;
   height: 1024px;
   justify-content: center;
   margin-inline: auto;
   width: 1440px;
+}
+
+.logo {
+  background-image: url('../../assets/LOGO_POSITIVA\ 1.png');
+  width: 208px;
+  height: 158px;
 }
 
 .card-container {

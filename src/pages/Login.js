@@ -13,16 +13,12 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.buttonDisable = this.buttonDisable.bind(this);
     this.changeRoute = this.changeRoute.bind(this);
-    this.handleUser = this.handleUser.bind(this);
+    this.callAPI = this.callAPI.bind(this);
     this.state = {
       loginName: '',
       isBtnDisable: true,
     };
   }
-
-  // componentDidUpdate() {
-  //   this.handleUser();
-  // }
 
   handleChange({ target }) {
     const { name, value, type, checked } = target;
@@ -31,14 +27,13 @@ class Login extends Component {
     }, () => this.buttonDisable());
   }
 
-  async handleUser() {
+  async callAPI() {
     const { loginName } = this.state;
     await createUser({ name: loginName });
   }
 
   changeRoute(event) {
-    event.preventDefault();
-    this.handleUser();
+    event.preventDefault(event);
     const { history } = this.props;
     history.push('/search');
   }
@@ -49,13 +44,14 @@ class Login extends Component {
 
     this.setState({
       isBtnDisable: validateInput,
-    });
+    }, () => this.callAPI());
   }
 
   render() {
     const { loginName, isBtnDisable } = this.state;
     return (
       <div data-testid="page-login" className="login-page">
+        <section className="logo" />
         <section className="card-container">
           <form
             onSubmit={ (event) => this.changeRoute(event) }
@@ -87,6 +83,9 @@ class Login extends Component {
 
 Login.propTypes = {
   isBtnDisable: PropTypes.bool,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 }.isRequire;
 
 export default Login;
