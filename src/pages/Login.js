@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../components/Button';
 import Input from '../components/Input';
-// import { createUser } from '../services/userAPI';
+import { createUser } from '../services/userAPI';
 import './css/login.css';
 
 const NAME_LENGTH = 3;
@@ -12,7 +12,8 @@ class Login extends Component {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.buttonDisable = this.buttonDisable.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
+    this.changeRoute = this.changeRoute.bind(this);
+    this.handleUser = this.handleUser.bind(this);
     this.state = {
       loginName: '',
       isBtnDisable: true,
@@ -20,7 +21,7 @@ class Login extends Component {
   }
 
   // componentDidUpdate() {
-  //   this.handleClick();
+  //   this.handleUser();
   // }
 
   handleChange({ target }) {
@@ -30,10 +31,16 @@ class Login extends Component {
     }, () => this.buttonDisable());
   }
 
-  async handleClick() {
+  async handleUser() {
     const { loginName } = this.state;
-    // const {history } =
     await createUser({ name: loginName });
+  }
+
+  changeRoute(event) {
+    event.preventDefault();
+    this.handleUser();
+    const { history } = this.props;
+    history.push('/search');
   }
 
   buttonDisable() {
@@ -50,7 +57,7 @@ class Login extends Component {
     return (
       <div data-testid="page-login" className="login-page">
         <section className="card-container">
-          <form className="form-container">
+          <form onSubmit={ (event) => this.changeRoute(event) } className="form-container">
             <Input
               datatest="login-name-input"
               onInputChange={ this.handleChange }
@@ -62,11 +69,11 @@ class Login extends Component {
             <Button
               datatest="login-submit-button"
               text="Entrar"
-              type="button"
+              type="submit"
               name="isBtnDisable"
               elementId="buttonSubmit"
               value={ isBtnDisable }
-              handleClick={ this.handleClick }
+              changeRoute={ this.handleChange }
             />
           </form>
         </section>
