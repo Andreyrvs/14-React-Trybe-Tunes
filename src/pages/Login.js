@@ -45,7 +45,7 @@ class Login extends Component {
 
   buttonDisable() {
     const { loginName } = this.state;
-    const validateInput = loginName.length <= NAME_LENGTH;
+    const validateInput = loginName.length < NAME_LENGTH;
 
     this.setState({
       isBtnDisable: validateInput,
@@ -57,7 +57,10 @@ class Login extends Component {
     return (
       <div data-testid="page-login" className="login-page">
         <section className="card-container">
-          <form onSubmit={ (event) => this.changeRoute(event) } className="form-container">
+          <form
+            onSubmit={ (event) => this.changeRoute(event) }
+            className="form-container"
+          >
             <Input
               datatest="login-name-input"
               onInputChange={ this.handleChange }
