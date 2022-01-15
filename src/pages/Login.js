@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import { createUser } from '../services/userAPI';
 import './css/login.css';
+import Loading from '../components/Loading';
 
 const NAME_LENGTH = 3;
 
@@ -17,6 +18,7 @@ class Login extends Component {
     this.state = {
       loginName: '',
       isBtnDisable: true,
+      isLoading: false,
     };
   }
 
@@ -27,13 +29,19 @@ class Login extends Component {
     }, () => this.buttonDisable());
   }
 
-  async callAPI() {
+  async callAPI(event) {
+    event.preventDefault(event);
+    this.setState({
+      isLoading: true,
+    });
     const { loginName } = this.state;
     await createUser({ name: loginName });
+    this.setState({
+      isLoading: false,
+    }, this.changeRoute());
   }
 
-  changeRoute(event) {
-    event.preventDefault(event);
+  changeRoute() {
     const { history } = this.props;
     history.push('/search');
   }
@@ -44,38 +52,46 @@ class Login extends Component {
 
     this.setState({
       isBtnDisable: validateInput,
-    }, () => this.callAPI());
+    });
   }
 
+  // renderForm (){
+
+  // }
+
   render() {
-    const { loginName, isBtnDisable } = this.state;
+    const { isLoading, loginName, isBtnDisable } = this.state;
     return (
       <div data-testid="page-login" className="login-page">
-        <section className="logo" />
-        <section className="card-container">
-          <form
-            onSubmit={ (event) => this.changeRoute(event) }
-            className="form-container"
-          >
-            <Input
-              datatest="login-name-input"
-              onInputChange={ this.handleChange }
-              elementId="inputName"
-              name="loginName"
-              type="text"
-              value={ loginName }
-            />
-            <Button
-              datatest="login-submit-button"
-              text="Entrar"
-              type="submit"
-              name="isBtnDisable"
-              elementId="buttonSubmit"
-              value={ isBtnDisable }
-              changeRoute={ this.handleChange }
-            />
-          </form>
-        </section>
+        { isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
+          <>
+            <section className="logo" />
+            <section className="card-container">
+              <form
+                onSubmit={ (event) => this.callAPI(event) }
+                className="form-container"
+              >
+                <Input
+                  datatest="login-name-input"
+                  onInputChange={ this.handleChange }
+                  elementId="inputName"
+                  name="loginName"
+                  type="text"
+                  value={ loginName }
+                />
+                <Button
+                  datatest="login-submit-button"
+                  text="Entrar"
+                  type="submit"
+                  name="isBtnDisable"
+                  elementId="buttonSubmit"
+                  value={ isBtnDisable }
+                  changeRoute={ this.handleChange }
+                />
+              </form>
+            </section>
+          </>
+        )}
       </div>
     );
   }
