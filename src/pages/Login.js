@@ -15,11 +15,16 @@ class Login extends Component {
     this.buttonDisable = this.buttonDisable.bind(this);
     this.changeRoute = this.changeRoute.bind(this);
     this.callAPI = this.callAPI.bind(this);
+    this.renderForm = this.renderForm.bind(this);
     this.state = {
       loginName: '',
       isBtnDisable: true,
       isLoading: false,
     };
+  }
+
+  componentDidMount() {
+    this.renderForm();
   }
 
   handleChange({ target }) {
@@ -55,12 +60,9 @@ class Login extends Component {
     });
   }
 
-  // renderForm (){
-
-  // }
-
-  render() {
+  renderForm() {
     const { isLoading, loginName, isBtnDisable } = this.state;
+
     return (
       <div data-testid="page-login" className="login-page">
         { isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
@@ -93,6 +95,12 @@ class Login extends Component {
           </>
         )}
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>{this.renderForm()}</div>
     );
   }
 }
