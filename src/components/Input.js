@@ -9,7 +9,7 @@ class Input extends Component {
         <label htmlFor={ elementId }>
           <input
             data-testid={ datatest }
-            id={ elementId }
+            className={ elementId }
             type={ type }
             value={ value }
             name={ name }

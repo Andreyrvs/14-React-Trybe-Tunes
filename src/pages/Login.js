@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../components/Button';
 import Input from '../components/Input';
 // import { createUser } from '../services/userAPI';
-import './login.css';
+import './css/login.css';
 
 const NAME_LENGTH = 3;
 
@@ -30,11 +30,11 @@ class Login extends Component {
     }, () => this.buttonDisable());
   }
 
-  // async handleClick() {
-  //   const { loginName } = this.state;
-  //   const {history } =
-  //   await createUser({ nome: loginName });
-  // }
+  async handleClick() {
+    const { loginName } = this.state;
+    // const {history } =
+    await createUser({ name: loginName });
+  }
 
   buttonDisable() {
     const { loginName } = this.state;
@@ -54,7 +54,7 @@ class Login extends Component {
             <Input
               datatest="login-name-input"
               onInputChange={ this.handleChange }
-              elementId="input-login-name"
+              elementId="inputName"
               name="loginName"
               type="text"
               value={ loginName }
@@ -64,7 +64,7 @@ class Login extends Component {
               text="Entrar"
               type="button"
               name="isBtnDisable"
-              elementId="button-login-submit"
+              elementId="buttonSubmit"
               value={ isBtnDisable }
               handleClick={ this.handleClick }
             />

@@ -11,7 +11,7 @@ class Button extends Component {
             data-testid={ datatest }
             disabled={ value }
             type={ type === 'button' ? 'button' : 'submit' }
-            id={ elementId }
+            className={ elementId }
             onClick={ handleClick }
           >
             {text}
