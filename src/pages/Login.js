@@ -67,7 +67,7 @@ class Login extends Component {
       <div data-testid="page-login" className="login-page">
         { isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
           <>
-            <section className="logo" />
+            <section className="logo-login" />
             <section className="card-container">
               <form
                 onSubmit={ (event) => this.callAPI(event) }
