@@ -1,0 +1,9 @@
+.search-page {
+  background-color: rgba(255, 140, 0, 0.404);
+  display: flex;
+  flex-direction: column;
+  gap: 104px;
+  height: 1024px;
+  margin-inline: auto;
+  width: 1440px;
+}
