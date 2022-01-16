@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import { getUser } from '../services/userAPI';
 import './css/search.css';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import { Link } from 'react-router-dom';
 
 const NAME_LENGTH = 2;
 
@@ -92,18 +93,24 @@ class Search extends Component {
         <section className="card-album-container">
           {searchArtist.map((artist) => (
             <section key={ artist.collectionId } className="card-album">
-              <img
-                className="album-image"
-                src={ artist.artworkUrl100 }
-                alt={ artist.artistName }
-              />
+              <Link
+                to={ `/album/${artist.collectionId}` }
+                data-testid={ `link-to-album-${artist.collectionId}` }
+              >
+                <img
+                  className="album-image"
+                  src={ artist.artworkUrl100 }
+                  alt={ artist.artistName }
+                />
+              </Link>
               <span>
                 {artist.collectionName}
               </span>
               <span>
                 {artist.artistName}
               </span>
-            </section>))}
+            </section>
+          ))}
         </section>
         {/* )} */}
       </div>
