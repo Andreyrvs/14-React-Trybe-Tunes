@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import Loading from '../components/Loading';
 import { getUser } from '../services/userAPI';
 import './css/search.css';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 const NAME_LENGTH = 2;
 
@@ -16,11 +17,14 @@ class Search extends Component {
     this.renderForm = this.renderForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.buttonDisable = this.buttonDisable.bind(this);
+    this.callAPI = this.callAPI.bind(this);
     this.state = {
       userName: '',
       isLoading: false,
+      searchLoading: false,
       isBtnDisable: true,
-      searchArtist: '',
+      searchArtist: [],
+      inputValue: '',
     };
   }
 
@@ -47,31 +51,45 @@ class Search extends Component {
   }
 
   buttonDisable() {
-    const { searchArtist } = this.state;
-    const validateInput = searchArtist.length < NAME_LENGTH;
+    const { inputValue } = this.state;
+    const validateInput = inputValue.length < NAME_LENGTH;
 
     this.setState({
       isBtnDisable: validateInput,
     });
   }
 
+  async callAPI(event) {
+    event.preventDefault(event);
+    this.setState({
+      searchLoading: true,
+    });
+    const { inputValue } = this.state;
+    const resolve = await searchAlbumsAPI(inputValue);
+    this.setState({
+      searchLoading: false,
+      searchArtist: resolve,
+    }, () => this.renderForm());
+    console.log(resolve);
+  }
+
   renderForm() {
-    const { searchArtist, isBtnDisable } = this.state;
+    const { inputValue, isBtnDisable } = this.state;
     return (
-      <form>
+      <form onSubmit={ (event) => this.callAPI(event) }>
         <Input
           datatest="search-artist-input"
           onInputChange={ this.handleChange }
           elementId="input-search-artist"
-          name="searchArtist"
+          name="inputValue"
           type="text"
-          value={ searchArtist }
+          value={ inputValue }
           placeHolder="Nome do Artista"
         />
         <Button
           datatest="search-artist-button"
           text="Pesquisar"
-          type="button"
+          type="submit"
           name="isBtnDisable"
           elementId="button-search-artist"
           value={ isBtnDisable }
@@ -82,7 +100,7 @@ class Search extends Component {
   }
 
   render() {
-    const { isLoading, userName } = this.state;
+    const { isLoading, userName, searchArtist, searchLoading } = this.state;
     return (
       <div data-testid="page-search" className="search-page">
         {isLoading ? <Loading /> : (
@@ -92,6 +110,17 @@ class Search extends Component {
               {this.renderForm()}
             </div>
           </>
+        )}
+        {searchLoading ? <Loading /> : (
+          <section className="card-album-container">
+            <section className="card-album">
+              {searchArtist.map((artist) => (
+                <p key={ artist.collectionId }>
+                  {artist.collectionName}
+                </p>
+              ))}
+            </section>
+          </section>
         )}
       </div>
     );
