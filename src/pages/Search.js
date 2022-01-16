@@ -65,34 +65,45 @@ class Search extends Component {
     event.preventDefault(event);
     this.setState({
       searchLoading: true,
+      inputValue: '',
     });
     const { inputValue } = this.state;
     const resolve = await searchAlbumsAPI(inputValue);
     this.setState({
       searchLoading: false,
       searchArtist: resolve,
-    }, () => this.renderForm());
-    this.setState({
-      inputValue: '',
       artistResult: inputValue,
-    }, () => this.renderAlbums());
+    }, () => this.renderForm());
+    console.log(resolve);
   }
 
   renderAlbums() {
     const { searchArtist, artistResult } = this.state;
     return (
-      <>
-        <h1>
-          {`Resultado de álbuns de: ${artistResult}`}
-        </h1>
-        {searchArtist.map((artist) => (
-          <section key={ artist.collectionId } className="card-album">
-            <span>
-              {artist.artistCollection}
-            </span>
-          </section>
-        ))}
-      </>
+      <div className="render-albums">
+        <section>
+          <h1>
+            {`Resultado de álbuns de: ${artistResult}`}
+          </h1>
+        </section>
+        <section className="card-album-container">
+          {searchArtist.map((artist) => (
+            <section key={ artist.collectionId } className="card-album">
+              <img
+                className="album-image"
+                src={ artist.artworkUrl100 }
+                alt={ artist.artistName }
+              />
+              <span>
+                {artist.collectionName}
+              </span>
+              <span>
+                {artist.artistName}
+              </span>
+            </section>
+          ))}
+        </section>
+      </div>
     );
   }
 
@@ -116,7 +127,7 @@ class Search extends Component {
           name="isBtnDisable"
           elementId="button-search-artist"
           value={ isBtnDisable }
-          handleChange={ this.handleChange }
+          handleChange={ this.renderAlbums }
         />
       </form>
     );
@@ -130,13 +141,11 @@ class Search extends Component {
           <>
             <Header userName={ userName } />
             {searchLoading ? <Loading /> : (
-              <section className="card-album-container">
-                <div>
+              <section className="search-container">
+                <div className="form-album-container">
                   {this.renderForm()}
                 </div>
-                <div>
-                  {this.renderAlbums()}
-                </div>
+                {this.renderAlbums()}
               </section>
             )}
           </>
