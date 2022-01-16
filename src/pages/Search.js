@@ -18,6 +18,7 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.buttonDisable = this.buttonDisable.bind(this);
     this.callAPI = this.callAPI.bind(this);
+    this.renderAlbums = this.renderAlbums.bind(this);
     this.state = {
       userName: '',
       isLoading: false,
@@ -25,6 +26,7 @@ class Search extends Component {
       isBtnDisable: true,
       searchArtist: [],
       inputValue: '',
+      artistResult: '',
     };
   }
 
@@ -70,7 +72,28 @@ class Search extends Component {
       searchLoading: false,
       searchArtist: resolve,
     }, () => this.renderForm());
-    console.log(resolve);
+    this.setState({
+      inputValue: '',
+      artistResult: inputValue,
+    }, () => this.renderAlbums());
+  }
+
+  renderAlbums() {
+    const { searchArtist, artistResult } = this.state;
+    return (
+      <>
+        <h1>
+          {`Resultado de álbuns de: ${artistResult}`}
+        </h1>
+        {searchArtist.map((artist) => (
+          <section key={ artist.collectionId } className="card-album">
+            <span>
+              {artist.artistCollection}
+            </span>
+          </section>
+        ))}
+      </>
+    );
   }
 
   renderForm() {
@@ -93,34 +116,30 @@ class Search extends Component {
           name="isBtnDisable"
           elementId="button-search-artist"
           value={ isBtnDisable }
-          changeRoute={ this.handleChange }
+          handleChange={ this.handleChange }
         />
       </form>
     );
   }
 
   render() {
-    const { isLoading, userName, searchArtist, searchLoading } = this.state;
+    const { isLoading, userName, searchLoading } = this.state;
     return (
       <div data-testid="page-search" className="search-page">
         {isLoading ? <Loading /> : (
           <>
             <Header userName={ userName } />
-            <div>
-              {this.renderForm()}
-            </div>
+            {searchLoading ? <Loading /> : (
+              <section className="card-album-container">
+                <div>
+                  {this.renderForm()}
+                </div>
+                <div>
+                  {this.renderAlbums()}
+                </div>
+              </section>
+            )}
           </>
-        )}
-        {searchLoading ? <Loading /> : (
-          <section className="card-album-container">
-            <section className="card-album">
-              {searchArtist.map((artist) => (
-                <p key={ artist.collectionId }>
-                  {artist.collectionName}
-                </p>
-              ))}
-            </section>
-          </section>
         )}
       </div>
     );
