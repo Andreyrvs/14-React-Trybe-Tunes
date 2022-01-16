@@ -66,21 +66,24 @@ class Search extends Component {
     this.setState({
       searchLoading: true,
       inputValue: '',
+      isBtnDisable: true,
     });
     const { inputValue } = this.state;
     const resolve = await searchAlbumsAPI(inputValue);
     this.setState({
       searchLoading: false,
-      searchArtist: resolve,
       artistResult: inputValue,
-    }, () => this.renderForm());
+      searchArtist: resolve,
+    });
+
     console.log(resolve);
   }
 
   renderAlbums() {
-    const { searchArtist, artistResult } = this.state;
+    const { artistResult, searchArtist } = this.state;
     return (
       <div className="render-albums">
+        {/* { (searchArtist !== inputValue) ? <p>Nenhum álbum foi encontrado</p> : ( */}
         <section>
           <h1>
             {`Resultado de álbuns de: ${artistResult}`}
@@ -100,9 +103,9 @@ class Search extends Component {
               <span>
                 {artist.artistName}
               </span>
-            </section>
-          ))}
+            </section>))}
         </section>
+        {/* )} */}
       </div>
     );
   }
