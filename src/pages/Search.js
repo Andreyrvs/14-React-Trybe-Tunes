@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import Loading from '../components/Loading';
 import { getUser } from '../services/userAPI';
-import './css/search.css';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import { Link } from 'react-router-dom';
+import './css/search.css';
 
 const NAME_LENGTH = 2;
 
@@ -76,16 +76,14 @@ class Search extends Component {
       artistResult: inputValue,
       searchArtist: resolve,
     });
-
-    console.log(resolve);
   }
 
   renderAlbums() {
     const { artistResult, searchArtist } = this.state;
     return (
       <div className="render-albums">
-        {/* { (searchArtist !== inputValue) ? <p>Nenhum álbum foi encontrado</p> : ( */}
-        <section>
+        {/* { searchArtist ? ( */}
+        <section className="album-h1">
           <h1>
             {`Resultado de álbuns de: ${artistResult}`}
           </h1>
@@ -112,7 +110,7 @@ class Search extends Component {
             </section>
           ))}
         </section>
-        {/* )} */}
+        {/* ) : <p>Nenhum álbum foi encontrado</p> } */}
       </div>
     );
   }
@@ -121,24 +119,26 @@ class Search extends Component {
     const { inputValue, isBtnDisable } = this.state;
     return (
       <form onSubmit={ (event) => this.callAPI(event) }>
-        <Input
-          datatest="search-artist-input"
-          onInputChange={ this.handleChange }
-          elementId="input-search-artist"
-          name="inputValue"
-          type="text"
-          value={ inputValue }
-          placeHolder="Nome do Artista"
-        />
-        <Button
-          datatest="search-artist-button"
-          text="Pesquisar"
-          type="submit"
-          name="isBtnDisable"
-          elementId="button-search-artist"
-          value={ isBtnDisable }
-          handleChange={ this.renderAlbums }
-        />
+        <section className="input-btn-container">
+          <Input
+            datatest="search-artist-input"
+            onInputChange={ this.handleChange }
+            elementId="input-search-artist"
+            name="inputValue"
+            type="text"
+            value={ inputValue }
+            placeHolder="Nome do Artista"
+          />
+          <Button
+            datatest="search-artist-button"
+            text="Pesquisar"
+            type="submit"
+            name="isBtnDisable"
+            elementId="button-search-artist"
+            value={ isBtnDisable }
+            handleChange={ this.renderAlbums }
+          />
+        </section>
       </form>
     );
   }

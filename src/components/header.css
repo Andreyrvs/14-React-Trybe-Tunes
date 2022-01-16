@@ -35,3 +35,27 @@
 .user-default {
   margin-left: 3px;
 }
+
+.link-container {
+  display: flex;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  justify-content: center;
+}
+
+.link-search {
+  background-color: #f0f2f5;
+  height: 78px;
+  width: 478px;
+}
+
+.link-favorites {
+  background-color: #f0f2f5;
+  height: 78px;
+  width: 478px;
+}
+
+.link-profile {
+  background-color: #f0f2f5;
+  height: 78px;
+  width: 478px;
+}

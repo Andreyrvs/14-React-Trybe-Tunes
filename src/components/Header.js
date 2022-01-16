@@ -23,9 +23,30 @@ class Header extends Component {
             </section>
           </section>
           <section className="link-container">
-            <Link to="/search" data-testid="link-to-search">Search</Link>
-            <Link to="/favorites" data-testid="link-to-favorites">Favorites</Link>
-            <Link to="/profile" data-testid="link-to-profile">Profile</Link>
+            <div className="link-search">
+              <Link
+                to="/search"
+                data-testid="link-to-search"
+              >
+                Search
+              </Link>
+            </div>
+            <div className="link-favorites">
+              <Link
+                to="/favorites"
+                data-testid="link-to-favorites"
+              >
+                Favorites
+              </Link>
+            </div>
+            <div className="link-profile">
+              <Link
+                to="/profile"
+                data-testid="link-to-profile"
+              >
+                Profile
+              </Link>
+            </div>
           </section>
         </header>
       </div>
