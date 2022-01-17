@@ -1,5 +1,5 @@
 .search-page {
-  background-color: #e5e5e5;
+  background-color: white;
   display: flex;
   flex-direction: column;
   gap: 104px;
@@ -43,6 +43,10 @@
   margin-left: 93px;
 }
 
+.album-h1 > h1 {
+  font-size: 24px;
+}
+
 .album-image {
   border-radius: 6px 6px 0 0;
   height: 180px;
@@ -64,4 +68,12 @@
 .input-search-artist {
   height: 45px;
   width: 519px;
+}
+
+.album-not-found-container {
+  display: flex;
+}
+
+.album-not-found {
+  font-size: 60px;
 }

@@ -8,6 +8,7 @@ import Loading from '../components/Loading';
 import { getUser } from '../services/userAPI';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import './css/search.css';
+import AlbumNotFound from '../components/AlbumNotFound';
 
 const NAME_LENGTH = 2;
 
@@ -81,7 +82,7 @@ class Search extends Component {
   renderAlbums() {
     const { artistResult, searchArtist } = this.state;
     return (
-      <div className="render-albums">
+      <>
         <section className="album-h1">
           <h1>
             {`Resultado de álbuns de: ${artistResult}`}
@@ -109,7 +110,7 @@ class Search extends Component {
             </section>
           ))}
         </section>
-      </div>
+      </>
     );
   }
 
@@ -145,23 +146,26 @@ class Search extends Component {
     const { isLoading, userName, searchLoading, searchArtist, artistResult } = this.state;
     const albumNotFound = searchArtist.length === 0 && artistResult;
     return (
-      <div data-testid="page-search" className="search-page">
+      <section data-testid="page-search" className="search-page">
         {isLoading ? <Loading /> : (
           <>
             <Header userName={ userName } />
             {searchLoading ? <Loading /> : (
               <section className="search-container">
-                <div className="form-album-container">
+                <section className="form-album-container">
                   {this.renderForm()}
-                </div>
-                { albumNotFound ? <p>Nenhum álbum foi encontrado</p> : (
-                  this.renderAlbums()
-                )}
+                </section>
+                <section className="render-albums">
+                  { albumNotFound
+                    ? <AlbumNotFound /> : (
+                      this.renderAlbums()
+                    )}
+                </section>
               </section>
             )}
           </>
         )}
-      </div>
+      </section>
     );
   }
 }
