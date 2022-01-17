@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import { createUser } from '../services/userAPI';
-import './css/login.css';
-import Loading from '../components/Loading';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import { createUser } from '../../services/userAPI';
+import './login.css';
+import Loading from '../../components/Loading';
 
 const NAME_LENGTH = 3;
 

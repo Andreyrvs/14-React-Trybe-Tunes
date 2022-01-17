@@ -12,9 +12,9 @@ class Header extends Component {
       <div className="header">
         <header data-testid="header-component" className="header-container">
           <section className="header-content-container">
-            <section className="logo-trybe-container">
+            <Link to="/" className="logo-trybe-container">
               <img src={ logoTrybe } alt="logo-trybe" className="logo-trybe" />
-            </section>
+            </Link>
             <section className="user-name-container">
               <img src={ userDefault } alt="user-default" className="user-default" />
               <span data-testid="header-user-name" className="user">

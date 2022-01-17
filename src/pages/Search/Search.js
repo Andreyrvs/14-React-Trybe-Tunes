@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
-import Header from '../components/Header';
-import Input from '../components/Input';
-import Loading from '../components/Loading';
-import { getUser } from '../services/userAPI';
-import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import './css/search.css';
-import AlbumNotFound from '../components/AlbumNotFound';
+import Button from '../../components/Button';
+import Header from '../../components/Header';
+import Input from '../../components/Input';
+import Loading from '../../components/Loading';
+import { getUser } from '../../services/userAPI';
+import searchAlbumsAPI from '../../services/searchAlbumsAPI';
+import './search.css';
+import AlbumNotFound from '../../components/AlbumNotFound';
 
 const NAME_LENGTH = 2;
 
