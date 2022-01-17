@@ -5,24 +5,23 @@ import Button from '../../components/Button';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Loading from '../../components/Loading';
-import { getUser } from '../../services/userAPI';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
-import './search.css';
 import AlbumNotFound from '../../components/AlbumNotFound';
+import './search.css';
+import { getUser } from '../../services/userAPI';
 
 const NAME_LENGTH = 2;
 
 class Search extends Component {
   constructor() {
     super();
-    this.receiveAPI = this.receiveAPI.bind(this);
     this.renderForm = this.renderForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.buttonDisable = this.buttonDisable.bind(this);
     this.callAPI = this.callAPI.bind(this);
+    this.receiveAPI = this.receiveAPI.bind(this);
     this.renderAlbums = this.renderAlbums.bind(this);
     this.state = {
-      userName: '',
       isLoading: false,
       searchLoading: false,
       isBtnDisable: true,
@@ -43,6 +42,15 @@ class Search extends Component {
     }, () => this.buttonDisable());
   }
 
+  buttonDisable() {
+    const { inputValue } = this.state;
+    const validateInput = inputValue.length < NAME_LENGTH;
+
+    this.setState({
+      isBtnDisable: validateInput,
+    });
+  }
+
   async receiveAPI() {
     this.setState({
       isLoading: true,
@@ -51,15 +59,6 @@ class Search extends Component {
     this.setState({
       userName: resolve.name,
       isLoading: false,
-    });
-  }
-
-  buttonDisable() {
-    const { inputValue } = this.state;
-    const validateInput = inputValue.length < NAME_LENGTH;
-
-    this.setState({
-      isBtnDisable: validateInput,
     });
   }
 

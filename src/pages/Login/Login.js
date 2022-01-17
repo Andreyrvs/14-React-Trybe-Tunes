@@ -16,6 +16,7 @@ class Login extends Component {
     this.changeRoute = this.changeRoute.bind(this);
     this.callAPI = this.callAPI.bind(this);
     this.renderForm = this.renderForm.bind(this);
+
     this.state = {
       loginName: '',
       isBtnDisable: true,
