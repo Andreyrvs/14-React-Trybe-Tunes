@@ -29,7 +29,7 @@ describe('7 - Crie a lista de músicas do álbum selecionado', () => {
     expect(spy).toHaveBeenCalledWith('12');
   });
 
-  it.only('Será validado se o nome da banda ou artista e o nome do álbum são exibidos', async () => {
+  it('Será validado se o nome da banda ou artista e o nome do álbum são exibidos', async () => {
     jest.spyOn(musicsAPI, 'default').mockImplementation(
       () => Promise.resolve(musicAPIDefaultResponse),
     );

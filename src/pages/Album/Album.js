@@ -26,7 +26,7 @@ class Album extends Component {
     // });
     const { match: { params: { id } } } = this.props;
     const response = await getMusics(id);
-    console.log(response);
+    // console.log(response);
     this.setState({
       albumMusic: response,
       // albumLoading: false,
@@ -39,16 +39,16 @@ class Album extends Component {
       <div className="album-page">
         <Header userName={ userName } />
         <section className="album-description">
-          {albumMusic.map((artist) => (
-            artist.wrapperType === 'collection' ? (
-              <section key={ artist.artistId } className="artist-container">
+          {albumMusic.map((artist, index) => (
+            index === 0 ? (
+              <section key={ artist.collectionId } className="artist-container">
                 <p data-testid="album-name">{artist.collectionName}</p>
                 <p data-testid="artist-name">{artist.artistName}</p>
               </section>
             ) : (
               <section key={ artist.trackId } className="track-container">
                 <MusicCard
-                  key={ artist.artistId }
+                // key={ artist.artistId }
                   previewUrl={ artist.previewUrl }
                   artist={ artist.collectionId }
                   track={ artist.trackName }
