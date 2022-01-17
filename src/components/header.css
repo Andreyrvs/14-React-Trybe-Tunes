@@ -46,20 +46,44 @@
   justify-content: center;
 }
 
+a {
+  font-size: 28px;
+  padding: 20px 180px;
+}
+
+a:link, a:visited {
+  color: #023031;
+  text-decoration: none;
+}
+
+.link-container > div:hover, .link-container > div:active {
+  background-color: #036b52;
+  text-decoration: none;
+}
+
 .link-search {
+  align-items: center;
   background-color: #f0f2f5;
+  display: flex;
   height: 78px;
+  justify-content: center;
   width: 478px;
 }
 
 .link-favorites {
+  align-items: center;
   background-color: #f0f2f5;
+  display: flex;
   height: 78px;
+  justify-content: center;
   width: 478px;
 }
 
 .link-profile {
+  align-items: center;
   background-color: #f0f2f5;
+  display: flex;
   height: 78px;
+  justify-content: center;
   width: 478px;
 }

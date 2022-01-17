@@ -27,7 +27,7 @@ class Album extends Component {
     });
     const { match: { params: { id } } } = this.props;
     const response = await getMusics(id);
-    // console.log(response);
+    console.log(response);
     this.setState({
       albumMusic: response,
       albumLoading: false,
@@ -44,18 +44,36 @@ class Album extends Component {
             {albumMusic.map((artist, index) => (
               index === 0 ? (
                 <section key={ artist.collectionId } className="artist-container">
-                  <p data-testid="album-name">{artist.collectionName}</p>
-                  <p data-testid="artist-name">{artist.artistName}</p>
+                  <img
+                    src={ artist.artworkUrl100 }
+                    alt={ artist.artistName }
+                    height="290px"
+                    width="290px"
+                  />
+                  <p
+                    className="album-name"
+                    data-testid="album-name"
+                  >
+                    {artist.collectionName}
+                  </p>
+                  <p
+                    className="artist-name"
+                    data-testid="artist-name"
+                  >
+                    {artist.artistName}
+                  </p>
                 </section>
               ) : (
-                <section key={ artist.trackId } className="track-container">
-                  <MusicCard
-                    previewUrl={ artist.previewUrl }
-                    artist={ artist.collectionId }
-                    track={ artist.trackName }
-                  />
-                </section>
-
+                <>
+                  <hr />
+                  <section key={ artist.trackId } className="track-container">
+                    <MusicCard
+                      previewUrl={ artist.previewUrl }
+                      artist={ artist.collectionId }
+                      track={ artist.trackName }
+                    />
+                  </section>
+                </>
               )
             ))}
           </section>

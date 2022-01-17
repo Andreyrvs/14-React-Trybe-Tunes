@@ -2,10 +2,14 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 1024px;
+  margin-inline: auto;
+  width: 1440px;
 }
 
 .album-description {
+  display: flex;
+  flex-flow: column;
   margin-top: 100px;
 }
 
@@ -14,7 +18,38 @@
   flex-direction: column;
 }
 
-.track-container {
+.album-name {
+  color: #023031;
+  font-size: 36px;
+}
+
+.artist-name {
+  font-size: 24px;
+}
+
+.music-card-container {
   display: flex;
-  flex-direction: column;
+}
+
+.track-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.track-container > p {
+  flex-flow: wrap;
+  margin-right: 30px;
+}
+
+.track-container > audio {
+  background: #f0f2f5;
+  border-radius: 50px;
+  height: 66px;
+  width: 438px;
+}
+
+hr {
+  border: 1px solid #e1e5eb;
+  width: 728px;
 }
