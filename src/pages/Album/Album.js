@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Header from '../../components/Header';
+import MusicCard from '../../components/MusicCard';
 // import Loading from '../../components/Loading';
 import getMusics from '../../services/musicsAPI';
 import './album.css';
@@ -11,8 +11,8 @@ class Album extends Component {
     this.callAPI = this.callAPI.bind(this);
     this.state = {
       albumMusic: [],
-      isLoading: false,
-      albumLoading: false,
+      // isLoading: false,
+      // albumLoading: false,
     };
   }
 
@@ -21,15 +21,15 @@ class Album extends Component {
   }
 
   async callAPI() {
-    this.setState({
-      albumLoading: true,
-    });
+    // this.setState({
+    //   albumLoading: true,
+    // });
     const { match: { params: { id } } } = this.props;
     const response = await getMusics(id);
     console.log(response);
     this.setState({
       albumMusic: response,
-      albumLoading: false,
+      // albumLoading: false,
     });
   }
 
@@ -39,24 +39,24 @@ class Album extends Component {
       <div data-testid="page-album" className="album-page">
         <Header userName={ userName } />
         <section className="album-description">
-          {albumMusic.map((album, index) => (
+          {albumMusic.map((artist) => (
+            artist.wrapperType === 'collection' ? (
+              <section key={ artist.amgArtistId } className="artist-container">
+                <p data-testid="album-name">{artist.collectionName}</p>
+                <p data-testid="artist-name">{artist.artistName}</p>
+              </section>
+            ) : (
+              <section key={ artist.amgArtistId } className="track-container">
+                <p>{artist.trackName}</p>
+                <MusicCard previewUrl={ artist.previewUrl } />
+              </section>
 
-            <section key={ album.collectionId }>
-              <p data-testid="album-name">{album.albumName}</p>
-              <p data-testid="artist-name">{album.artistName}</p>
-            </section>))}
+            )
+          ))}
         </section>
       </div>
     );
   }
 }
-
-Album.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }),
-};
 
 export default Album;
