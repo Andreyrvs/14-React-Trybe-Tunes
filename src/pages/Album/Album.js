@@ -36,19 +36,23 @@ class Album extends Component {
   render() {
     const { albumMusic, userName } = this.state;
     return (
-      <div data-testid="page-album" className="album-page">
+      <div className="album-page">
         <Header userName={ userName } />
         <section className="album-description">
           {albumMusic.map((artist) => (
             artist.wrapperType === 'collection' ? (
-              <section key={ artist.amgArtistId } className="artist-container">
+              <section key={ artist.artistId } className="artist-container">
                 <p data-testid="album-name">{artist.collectionName}</p>
                 <p data-testid="artist-name">{artist.artistName}</p>
               </section>
             ) : (
-              <section key={ artist.amgArtistId } className="track-container">
-                <p>{artist.trackName}</p>
-                <MusicCard previewUrl={ artist.previewUrl } />
+              <section key={ artist.trackId } className="track-container">
+                <MusicCard
+                  key={ artist.artistId }
+                  previewUrl={ artist.previewUrl }
+                  artist={ artist.collectionId }
+                  track={ artist.trackName }
+                />
               </section>
 
             )
