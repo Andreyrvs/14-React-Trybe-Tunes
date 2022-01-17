@@ -7,8 +7,8 @@ import Input from '../../components/Input';
 import Loading from '../../components/Loading';
 import { getUser } from '../../services/userAPI';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
-import './search.css';
 import AlbumNotFound from '../../components/AlbumNotFound';
+import './search.css';
 
 const NAME_LENGTH = 2;
 

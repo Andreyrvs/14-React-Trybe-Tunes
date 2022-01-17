@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../../components/Header';
+// import Loading from '../../components/Loading';
+import getMusics from '../../services/musicsAPI';
+import './album.css';
 
 class Album extends Component {
   constructor() {
@@ -18,10 +22,11 @@ class Album extends Component {
 
   async callAPI() {
     this.setState({
-      albumLoading: false,
+      albumLoading: true,
     });
     const { match: { params: { id } } } = this.props;
     const response = await getMusics(id);
+    console.log(response);
     this.setState({
       albumMusic: response,
       albumLoading: false,
@@ -29,39 +34,29 @@ class Album extends Component {
   }
 
   render() {
-    const { albumMusic, userName, isLoading, albumLoading } = this.state;
-    console.log(albumMusic);
+    const { albumMusic, userName } = this.state;
     return (
-      <div data-testid="page-album">
-        {isLoading ? <Loading /> : (
-          <>
-            <Header userName={ userName } />
-            {albumLoading ? <Loading /> : (
-              <section className="album-description">
-                {albumMusic.map((album, index) => (
-                  index === 0
-                    ? (
-                      <section key={ album.collectionId }>
-                        <p data-testid="album-name">{album.albumName}</p>
-                        <p data-testid="artist-name">{album.artistName}</p>
-                      </section>)
-                    : (
-                      <section>
-                        <p>{album.trackName}</p>
-                      </section>
-                    )
-                ))}
-              </section>
-            )}
-          </>
-        )}
+      <div data-testid="page-album" className="album-page">
+        <Header userName={ userName } />
+        <section className="album-description">
+          {albumMusic.map((album, index) => (
+
+            <section key={ album.collectionId }>
+              <p data-testid="album-name">{album.albumName}</p>
+              <p data-testid="artist-name">{album.artistName}</p>
+            </section>))}
+        </section>
       </div>
     );
   }
 }
 
 Album.propTypes = {
-  match: PropTypes.object,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
 };
 
 export default Album;
