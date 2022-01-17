@@ -82,7 +82,6 @@ class Search extends Component {
     const { artistResult, searchArtist } = this.state;
     return (
       <div className="render-albums">
-        {/* { searchArtist ? ( */}
         <section className="album-h1">
           <h1>
             {`Resultado de álbuns de: ${artistResult}`}
@@ -110,7 +109,6 @@ class Search extends Component {
             </section>
           ))}
         </section>
-        {/* ) : <p>Nenhum álbum foi encontrado</p> } */}
       </div>
     );
   }
@@ -144,7 +142,8 @@ class Search extends Component {
   }
 
   render() {
-    const { isLoading, userName, searchLoading } = this.state;
+    const { isLoading, userName, searchLoading, searchArtist, artistResult } = this.state;
+    const albumNotFound = searchArtist.length === 0 && artistResult;
     return (
       <div data-testid="page-search" className="search-page">
         {isLoading ? <Loading /> : (
@@ -155,7 +154,9 @@ class Search extends Component {
                 <div className="form-album-container">
                   {this.renderForm()}
                 </div>
-                {this.renderAlbums()}
+                { albumNotFound ? <p>Nenhum álbum foi encontrado</p> : (
+                  this.renderAlbums()
+                )}
               </section>
             )}
           </>
