@@ -39,7 +39,7 @@ class Album extends Component {
     return (
       <div className="album-page" data-testid="page-album">
         <Header userName={ userName } />
-        {albumLoading ? <Loading /> : (
+        {albumLoading ? <Loading style={ { fontSize: '64px' } } /> : (
           <section className="album-description">
             {albumMusic.map((artist, index) => (
               index === 0 ? (

@@ -5,7 +5,6 @@ import Button from '../../components/Button';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Loading from '../../components/Loading';
-import { getUser } from '../../services/userAPI';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import AlbumNotFound from '../../components/AlbumNotFound';
 import './search.css';
@@ -15,15 +14,12 @@ const NAME_LENGTH = 2;
 class Search extends Component {
   constructor() {
     super();
-    this.receiveAPI = this.receiveAPI.bind(this);
     this.renderForm = this.renderForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.buttonDisable = this.buttonDisable.bind(this);
     this.callAPI = this.callAPI.bind(this);
     this.renderAlbums = this.renderAlbums.bind(this);
     this.state = {
-      userName: '',
-      isLoading: false,
       searchLoading: false,
       isBtnDisable: true,
       searchArtist: [],
@@ -32,26 +28,11 @@ class Search extends Component {
     };
   }
 
-  componentDidMount() {
-    this.receiveAPI();
-  }
-
   handleChange({ target }) {
     const { name, value, type, checked } = target;
     this.setState({
       [name]: type === 'checkbox' ? checked : value,
     }, () => this.buttonDisable());
-  }
-
-  async receiveAPI() {
-    this.setState({
-      isLoading: true,
-    });
-    const resolve = await getUser();
-    this.setState({
-      userName: resolve.name,
-      isLoading: false,
-    });
   }
 
   buttonDisable() {
@@ -143,27 +124,23 @@ class Search extends Component {
   }
 
   render() {
-    const { isLoading, userName, searchLoading, searchArtist, artistResult } = this.state;
+    const { searchLoading, searchArtist, artistResult } = this.state;
     const albumNotFound = searchArtist.length === 0 && artistResult;
     return (
       <section data-testid="page-search" className="search-page">
-        {isLoading ? <Loading /> : (
-          <>
-            <Header userName={ userName } />
-            {searchLoading ? <Loading /> : (
-              <section className="search-container">
-                <section className="form-album-container">
-                  {this.renderForm()}
-                </section>
-                <section className="render-albums">
-                  { albumNotFound
-                    ? <AlbumNotFound /> : (
-                      this.renderAlbums()
-                    )}
-                </section>
-              </section>
-            )}
-          </>
+        <Header />
+        {(searchLoading) ? <Loading style={ { fontSize: '64px' } } /> : (
+          <section className="search-container">
+            <section className="form-album-container">
+              {this.renderForm()}
+            </section>
+            <section className="render-albums">
+              { albumNotFound
+                ? <AlbumNotFound /> : (
+                  this.renderAlbums()
+                )}
+            </section>
+          </section>
         )}
       </section>
     );
