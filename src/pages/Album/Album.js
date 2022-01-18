@@ -5,34 +5,22 @@ import MusicCard from '../../components/MusicCard/MusicCard';
 import Loading from '../../components/Loading/Loading';
 import getMusics from '../../services/musicsAPI';
 import './album.css';
-import { addSong } from '../../services/favoriteSongsAPI';
 
 class Album extends Component {
   constructor() {
     super();
     this.callAPIgetMusics = this.callAPIgetMusics.bind(this);
     this.renderAlbum = this.renderAlbum.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.callAPIaddSong = this.callAPIaddSong.bind(this);
 
     this.state = {
       albumMusic: [],
       isLoading: false,
       albumLoading: false,
-      favoriteSong: '',
-      inputCheck: true,
     };
   }
 
   componentDidMount() {
     this.callAPIgetMusics();
-  }
-
-  handleChange({ target }) {
-    const { name, value, type, checked } = target;
-    this.setState({
-      [name]: type === 'checkbox' ? checked : value,
-    }, () => this.callAPIaddSong());
   }
 
   async callAPIgetMusics() {
@@ -48,72 +36,53 @@ class Album extends Component {
     });
   }
 
-  async callAPIaddSong() {
-    this.setState({
-      isLoading: true,
-      // inputCheck: false,
-    });
-    const response = await addSong();
-    console.log(response);
-    this.setState({
-      isLoading: false,
-      inputCheck: true,
-    });
-  }
-
   renderAlbum() {
-    const { albumMusic, isLoading, inputCheck } = this.state;
+    const { albumMusic } = this.state;
     return (
       <section className="album-container">
-        {isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
-          <>
-            <section className="album-music">
-              {albumMusic.map((artist, index) => (
-                index === 0 && (
+        <section className="album-music">
+          {albumMusic.map((artist, index) => (
+            index === 0 && (
 
-                  <section key={ artist.collectionId } className="artist-container">
-                    <img
-                      src={ artist.artworkUrl100 }
-                      alt={ artist.artistName }
-                      height="290px"
-                      width="290px"
-                    />
-                    <p
-                      className="album-name"
-                      data-testid="album-name"
-                    >
-                      {artist.collectionName}
-                    </p>
-                    <p
-                      className="artist-name"
-                      data-testid="artist-name"
-                    >
-                      {artist.artistName}
-                    </p>
-                  </section>
-                )
-              ))}
-            </section>
-            <section>
-              { albumMusic.map((artist, index) => (
-                index !== 0 && (
-                  <>
-                    <hr />
-                    <MusicCard
-                      key={ artist.trackId }
-                      previewUrl={ artist.previewUrl }
-                      artist={ artist.collectionId }
-                      track={ artist.trackName }
-                      trackId={ artist.trackId }
-                      onInputChange={ this.handleChange }
-                      value={ inputCheck }
-                    />
-                  </>
-                )
-              ))}
-            </section>
-          </>
-        )}
+              <section key={ artist.collectionId } className="artist-container">
+                <img
+                  src={ artist.artworkUrl100 }
+                  alt={ artist.artistName }
+                  height="290px"
+                  width="290px"
+                />
+                <p
+                  className="album-name"
+                  data-testid="album-name"
+                >
+                  {artist.collectionName}
+                </p>
+                <p
+                  className="artist-name"
+                  data-testid="artist-name"
+                >
+                  {artist.artistName}
+                </p>
+              </section>
+            )
+          ))}
+        </section>
+        <section>
+          { albumMusic.map((artist, index) => (
+            index !== 0 && (
+              <>
+                <hr />
+                <MusicCard
+                  key={ artist.trackId }
+                  previewUrl={ artist.previewUrl }
+                  artist={ artist.collectionId }
+                  track={ artist.trackName }
+                  trackId={ artist.trackId }
+                />
+              </>
+            )
+          ))}
+        </section>
       </section>
     );
   }

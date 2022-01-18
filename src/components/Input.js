@@ -12,6 +12,7 @@ class Input extends Component {
       placeHolder,
       label,
       elementClass,
+      inputCheck,
     } = this.props;
     return (
       <div>
@@ -26,6 +27,7 @@ class Input extends Component {
             name={ name }
             placeholder={ placeHolder }
             onChange={ onInputChange }
+            checked={ inputCheck }
           />
         </label>
       </div>
