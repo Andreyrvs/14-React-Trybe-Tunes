@@ -10,10 +10,12 @@ class Input extends Component {
       value,
       name,
       placeHolder,
+      label,
     } = this.props;
     return (
       <div>
         <label htmlFor={ elementId }>
+          {label}
           <input
             data-testid={ datatest }
             className={ elementId }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './musicCard.css';
+import Input from '../Input';
 
 class MusicCard extends Component {
   render() {
-    const { previewUrl, artist, track } = this.props;
+    const { previewUrl, artist, track, trackId } = this.props;
     return (
       <>
         <p className="track-name">{track}</p>
@@ -13,6 +14,11 @@ class MusicCard extends Component {
           O seu navegador não suporta o elemento
           <code>audio</code>
         </audio>
+        <Input
+          type="checkbox"
+          label="Favorita"
+          datatest={ `checkbox-music-${trackId}` }
+        />
       </>
     );
   }

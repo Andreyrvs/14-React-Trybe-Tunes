@@ -76,6 +76,7 @@ class Album extends Component {
                     previewUrl={ artist.previewUrl }
                     artist={ artist.collectionId }
                     track={ artist.trackName }
+                    trackId={ artist.trackId }
                   />
                 </section>
               </>

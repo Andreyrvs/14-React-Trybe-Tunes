@@ -15,7 +15,7 @@ describe('8 - Crie o mecanismo para adicionar músicas na lista de músicas favo
 
   afterEach(() => localStorage.clear());
 
-  it('Será validado se existe um checkbox para cada música da lista',
+  it.only('Será validado se existe um checkbox para cada música da lista',
     async () => {
       jest.spyOn(musicsAPI, 'default').mockImplementation(
         () => Promise.resolve(musicAPIDefaultResponse),
