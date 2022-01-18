@@ -10,7 +10,16 @@
 .album-description {
   display: flex;
   flex-flow: column;
-  margin-top: 100px;
+  margin-top: 22px;
+}
+
+.album-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 79px;
+  justify-content: flex-end;
+  margin-top: 310px;
 }
 
 .artist-container {
