@@ -1,0 +1,9 @@
+.profile-page {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 104px;
+  height: 1024px;
+  margin-inline: auto;
+  width: 1440px;
+}

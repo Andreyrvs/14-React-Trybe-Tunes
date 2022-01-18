@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Header from '../../components/Header';
+import './favorites.css';
 
 class Favorites extends Component {
   render() {
     return (
-      <div data-testid="page-favorites">
+      <section data-testid="page-favorites" className="favorites-page">
         <Header />
-      </div>
+      </section>
     );
   }
 }
