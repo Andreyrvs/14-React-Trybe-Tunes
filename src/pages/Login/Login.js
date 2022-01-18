@@ -77,7 +77,7 @@ class Login extends Component {
                 <Input
                   datatest="login-name-input"
                   onInputChange={ this.handleChange }
-                  elementId="inputName"
+                  elementClass="inputName"
                   name="loginName"
                   type="text"
                   value={ loginName }

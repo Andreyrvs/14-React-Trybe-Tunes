@@ -16,7 +16,7 @@ class Search extends Component {
     this.renderForm = this.renderForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.buttonDisable = this.buttonDisable.bind(this);
-    this.callAPI = this.callAPI.bind(this);
+    this.callAPIsearchAlbums = this.callAPIsearchAlbums.bind(this);
     this.renderAlbums = this.renderAlbums.bind(this);
     this.state = {
       searchLoading: false,
@@ -43,7 +43,7 @@ class Search extends Component {
     });
   }
 
-  async callAPI(event) {
+  async callAPIsearchAlbums(event) {
     event.preventDefault(event);
     this.setState({
       searchLoading: true,
@@ -97,12 +97,12 @@ class Search extends Component {
   renderForm() {
     const { inputValue, isBtnDisable } = this.state;
     return (
-      <form onSubmit={ (event) => this.callAPI(event) }>
+      <form onSubmit={ (event) => this.callAPIsearchAlbums(event) }>
         <section className="input-btn-container">
           <Input
             datatest="search-artist-input"
             onInputChange={ this.handleChange }
-            elementId="input-search-artist"
+            elementClass="input-search-artist"
             name="inputValue"
             type="text"
             value={ inputValue }

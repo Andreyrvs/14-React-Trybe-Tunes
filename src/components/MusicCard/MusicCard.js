@@ -5,9 +5,9 @@ import Input from '../Input';
 
 class MusicCard extends Component {
   render() {
-    const { previewUrl, artist, track, trackId, onInputChange } = this.props;
+    const { previewUrl, artist, track, trackId, onInputChange, inputCheck } = this.props;
     return (
-      <section>
+      <section className="track-container">
         <p className="track-name">{track}</p>
         <audio
           key={ artist }
@@ -24,8 +24,9 @@ class MusicCard extends Component {
           label="Favorita"
           datatest={ `checkbox-music-${trackId}` }
           onInputChange={ onInputChange }
-          // value={ favoriteSong }
-          name="favoriteSong"
+          value={ inputCheck }
+          name="inputCheck"
+          elementId="music-checkbox"
         />
       </section>
     );

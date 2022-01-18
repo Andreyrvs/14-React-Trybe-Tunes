@@ -11,6 +11,7 @@ class Input extends Component {
       name,
       placeHolder,
       label,
+      elementClass,
     } = this.props;
     return (
       <div>
@@ -18,7 +19,8 @@ class Input extends Component {
           {label}
           <input
             data-testid={ datatest }
-            className={ elementId }
+            className={ elementClass }
+            id={ elementId }
             type={ type }
             value={ value }
             name={ name }

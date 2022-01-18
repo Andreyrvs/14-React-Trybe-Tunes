@@ -13,12 +13,14 @@ class Album extends Component {
     this.callAPIgetMusics = this.callAPIgetMusics.bind(this);
     this.renderAlbum = this.renderAlbum.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.callAPIaddSong = this.callAPIaddSong.bind(this);
 
     this.state = {
       albumMusic: [],
       isLoading: false,
       albumLoading: false,
       favoriteSong: '',
+      inputCheck: true,
     };
   }
 
@@ -49,20 +51,21 @@ class Album extends Component {
   async callAPIaddSong() {
     this.setState({
       isLoading: true,
+      // inputCheck: false,
     });
     const response = await addSong();
     console.log(response);
     this.setState({
-      favoriteSong: response,
       isLoading: false,
+      inputCheck: true,
     });
   }
 
   renderAlbum() {
-    const { albumMusic, isLoading, favoriteSong } = this.state;
+    const { albumMusic, isLoading, inputCheck } = this.state;
     return (
       <section className="album-container">
-        {isLoading ? <Loading /> : (
+        {isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
           <>
             <section className="album-music">
               {albumMusic.map((artist, index) => (
@@ -96,7 +99,6 @@ class Album extends Component {
                 index !== 0 && (
                   <>
                     <hr />
-                    {/* <section key={ artist.trackId } className="track-container"> */}
                     <MusicCard
                       key={ artist.trackId }
                       previewUrl={ artist.previewUrl }
@@ -104,9 +106,8 @@ class Album extends Component {
                       track={ artist.trackName }
                       trackId={ artist.trackId }
                       onInputChange={ this.handleChange }
-                      value={ favoriteSong }
+                      value={ inputCheck }
                     />
-                    {/* </section> */}
                   </>
                 )
               ))}
