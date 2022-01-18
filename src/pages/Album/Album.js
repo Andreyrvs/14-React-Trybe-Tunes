@@ -14,7 +14,6 @@ class Album extends Component {
 
     this.state = {
       albumMusic: [],
-      isLoading: false,
       albumLoading: false,
     };
   }
