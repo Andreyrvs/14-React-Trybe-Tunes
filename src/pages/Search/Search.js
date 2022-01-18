@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import Input from '../../components/Input';
-import Loading from '../../components/Loading';
+import Loading from '../../components/Loading/Loading';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import AlbumNotFound from '../../components/AlbumNotFound';
 import './search.css';
@@ -146,9 +145,5 @@ class Search extends Component {
     );
   }
 }
-
-Search.propTypes = {
-  searchArtist: PropTypes.string,
-}.isRequire;
 
 export default Search;

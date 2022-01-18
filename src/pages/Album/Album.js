@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../../components/Header';
-import MusicCard from '../../components/MusicCard';
-import Loading from '../../components/Loading';
+import Header from '../../components/Header/Header';
+import MusicCard from '../../components/MusicCard/MusicCard';
+import Loading from '../../components/Loading/Loading';
 import getMusics from '../../services/musicsAPI';
 import './album.css';
 

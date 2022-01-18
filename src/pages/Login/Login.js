@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { createUser } from '../../services/userAPI';
 import './login.css';
-import Loading from '../../components/Loading';
+import Loading from '../../components/Loading/Loading';
 
 const NAME_LENGTH = 3;
 

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './header.css';
 import { Link } from 'react-router-dom';
-import userDefault from '../assets/default.png';
-import logoTrybe from '../assets/logo-header.png';
-import { getUser } from '../services/userAPI';
-import Loading from './Loading';
+import userDefault from '../../assets/default.png';
+import logoTrybe from '../../assets/logo-header.png';
+import { getUser } from '../../services/userAPI';
+import Loading from '../Loading/Loading';
 
 class Header extends Component {
   constructor() {
