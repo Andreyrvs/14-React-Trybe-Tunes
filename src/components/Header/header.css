@@ -47,13 +47,13 @@
   justify-content: center;
 }
 
-a {
-  font-size: 28px;
+.link-search > a {
   padding: 20px 180px;
 }
 
 a:link, a:visited {
   color: #023031;
+  font-size: 28px;
   text-decoration: none;
 }
 

@@ -7,7 +7,7 @@
   width: 1440px;
 }
 
-.album-description {
+.album-music {
   display: flex;
   flex-flow: column;
   margin-top: 22px;

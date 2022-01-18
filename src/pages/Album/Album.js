@@ -10,6 +10,7 @@ class Album extends Component {
   constructor() {
     super();
     this.callAPI = this.callAPI.bind(this);
+    this.renderAlbum = this.renderAlbum.bind(this);
     this.state = {
       albumMusic: [],
       // isLoading: false,
@@ -34,57 +35,64 @@ class Album extends Component {
     });
   }
 
+  renderAlbum() {
+    const { albumMusic } = this.state;
+    return (
+      <section className="album-container">
+        <section className="album-music">
+          {albumMusic.map((artist, index) => (
+            index === 0 && (
+
+              <section key={ artist.collectionId } className="artist-container">
+                <img
+                  src={ artist.artworkUrl100 }
+                  alt={ artist.artistName }
+                  height="290px"
+                  width="290px"
+                />
+                <p
+                  className="album-name"
+                  data-testid="album-name"
+                >
+                  {artist.collectionName}
+                </p>
+                <p
+                  className="artist-name"
+                  data-testid="artist-name"
+                >
+                  {artist.artistName}
+                </p>
+              </section>
+            )
+          ))}
+        </section>
+        <section>
+          { albumMusic.map((artist, index) => (
+            index !== 0 && (
+              <>
+                <hr />
+                <section key={ artist.trackId } className="track-container">
+                  <MusicCard
+                    previewUrl={ artist.previewUrl }
+                    artist={ artist.collectionId }
+                    track={ artist.trackName }
+                  />
+                </section>
+              </>
+            )
+          ))}
+        </section>
+      </section>
+    );
+  }
+
   render() {
-    const { albumMusic, userName, albumLoading } = this.state;
+    const { userName, albumLoading } = this.state;
     return (
       <div className="album-page" data-testid="page-album">
         <Header userName={ userName } />
         {albumLoading ? <Loading style={ { fontSize: '64px' } } /> : (
-          <section className="album-container">
-            <section className="album-description">
-              {albumMusic.map((artist, index) => (
-                index === 0 && (
-
-                  <section key={ artist.collectionId } className="artist-container">
-                    <img
-                      src={ artist.artworkUrl100 }
-                      alt={ artist.artistName }
-                      height="290px"
-                      width="290px"
-                    />
-                    <p
-                      className="album-name"
-                      data-testid="album-name"
-                    >
-                      {artist.collectionName}
-                    </p>
-                    <p
-                      className="artist-name"
-                      data-testid="artist-name"
-                    >
-                      {artist.artistName}
-                    </p>
-                  </section>
-                )
-              ))}
-            </section>
-            <section>
-              { albumMusic.map((artist, index) => (
-                index !== 0 && (
-                  <>
-                    <hr />
-                    <section key={ artist.trackId } className="track-container">
-                      <MusicCard
-                        previewUrl={ artist.previewUrl }
-                        artist={ artist.collectionId }
-                        track={ artist.trackName }
-                      />
-                    </section>
-                  </>
-                )
-              ))}
-            </section>
-          </section>
+          this.renderAlbum()
         )}
       </div>
     );
