@@ -5,11 +5,16 @@ import Input from '../Input';
 
 class MusicCard extends Component {
   render() {
-    const { previewUrl, artist, track, trackId } = this.props;
+    const { previewUrl, artist, track, trackId, onInputChange } = this.props;
     return (
-      <>
+      <section>
         <p className="track-name">{track}</p>
-        <audio key={ artist } data-testid="audio-component" src={ previewUrl } controls>
+        <audio
+          key={ artist }
+          data-testid="audio-component"
+          src={ previewUrl }
+          controls
+        >
           <track kind="captions" />
           O seu navegador não suporta o elemento
           <code>audio</code>
@@ -18,8 +23,11 @@ class MusicCard extends Component {
           type="checkbox"
           label="Favorita"
           datatest={ `checkbox-music-${trackId}` }
+          onInputChange={ onInputChange }
+          // value={ favoriteSong }
+          name="favoriteSong"
         />
-      </>
+      </section>
     );
   }
 }
