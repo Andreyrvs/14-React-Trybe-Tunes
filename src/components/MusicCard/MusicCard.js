@@ -12,7 +12,7 @@ class MusicCard extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       inputCheck: false,
-      isLoading: true,
+      isLoading: false,
     };
   }
 
@@ -21,16 +21,19 @@ class MusicCard extends Component {
     * Obtive ajuda das Pessoas Estudantes:
     *  Rolwane - Turma 17,
     *  [Ari] Aryeh Braid David - Turma 17,
-    * para resolver essa parte. Me ajudaram a desenvolver o Raciocinio na Salinha de estudos 03.
+    * para resolver essa parte. Me ajudaram a desenvolver o Raciocínio na Salinha de estudos 03.
     */
     const { dataAlbum: { trackId } } = this.props;
-    getFavoriteSongs().then((response) => {
-      const validadteCheck = response.some((el) => el.trackId === trackId);
-      this.setState({
-        isLoading: false,
-        inputCheck: validadteCheck,
-      });
-    });
+
+    getFavoriteSongs().then((response) => this.setState({
+      isLoading: false,
+    }, () => {
+      if (response.some((el) => el.trackId === trackId)) {
+        this.setState({
+          inputCheck: true,
+        });
+      }
+    }));
   }
 
   handleChange({ target }) {
@@ -42,6 +45,9 @@ class MusicCard extends Component {
 
   async callAPIaddSong() {
     const { dataAlbum } = this.props;
+    this.setState({
+      isLoading: true,
+    });
     const response = await addSong(dataAlbum);
     console.log(response);
     this.setState({
@@ -52,12 +58,12 @@ class MusicCard extends Component {
 
   render() {
     const { inputCheck, isLoading } = this.state;
-    const { dataAlbum: { previewUrl, artist, track, trackId } } = this.props;
+    const { dataAlbum: { previewUrl, artist, trackName, trackId } } = this.props;
     return (
       <section className="track-container">
         {isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
           <>
-            <p className="track-name">{track}</p>
+            <p className="track-name">{trackName}</p>
             <audio
               key={ artist }
               data-testid="audio-component"
