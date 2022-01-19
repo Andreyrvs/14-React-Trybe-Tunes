@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './musicCard.css';
 import Input from '../Input';
-import { addSong } from '../../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../../services/favoriteSongsAPI';
 import Loading from '../Loading/Loading';
 
 class MusicCard extends Component {
@@ -10,11 +10,16 @@ class MusicCard extends Component {
     super();
     this.callAPIaddSong = this.callAPIaddSong.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.receivedAPIgetFavoriteSongs = this.receivedAPIgetFavoriteSongs.bind(this);
 
     this.state = {
       inputCheck: false,
       isLoading: false,
     };
+  }
+
+  componentDidMount() {
+    this.receivedAPIgetFavoriteSongs();
   }
 
   handleChange({ target }) {
@@ -33,6 +38,10 @@ class MusicCard extends Component {
     this.setState({
       isLoading: false,
     });
+  }
+
+  async receivedAPIgetFavoriteSongs() {
+    const response = await getFavoriteSongs();
   }
 
   render() {

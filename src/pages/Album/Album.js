@@ -26,6 +26,7 @@ class Album extends Component {
     this.setState({
       albumLoading: true,
     });
+
     const { match: { params: { id } } } = this.props;
     const response = await getMusics(id);
     // console.log(response);
