@@ -10,16 +10,35 @@ class MusicCard extends Component {
     super();
     this.callAPIaddSong = this.callAPIaddSong.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.receivedAPIgetFavoriteSongs = this.receivedAPIgetFavoriteSongs.bind(this);
+    this.getFavoriteSongsAPI = this.getFavoriteSongsAPI.bind(this);
 
     this.state = {
       inputCheck: false,
-      isLoading: false,
+      isLoading: true,
+      addMusic: '',
+      getMusic: '',
     };
   }
 
   componentDidMount() {
-    this.receivedAPIgetFavoriteSongs();
+    const { dataAlbum: { trackId } } = this.props;
+    // getFavoriteSongs().then((response) => this.setState({
+    //   isLoading: false,
+    // }, () => {
+    //   if (response.some((el) => el.trackId === trackId)) {
+    //     this.setState({
+    //       inputCheck: true,
+    //     });
+    //   }
+    // }));
+
+    getFavoriteSongs().then((response) => {
+      const validadteCheck = response.some((el) => el.trackId === trackId);
+      this.setState({
+        isLoading: false,
+        inputCheck: validadteCheck,
+      });
+    });
   }
 
   handleChange({ target }) {
@@ -29,24 +48,34 @@ class MusicCard extends Component {
     }, () => this.callAPIaddSong());
   }
 
-  async callAPIaddSong() {
+  async getFavoriteSongsAPI() {
     this.setState({
       isLoading: true,
     });
-    const response = await addSong();
+
+    const response = await getFavoriteSongs();
     console.log(response);
     this.setState({
       isLoading: false,
+      getMusic: response,
     });
   }
 
-  async receivedAPIgetFavoriteSongs() {
-    const response = await getFavoriteSongs();
+  async callAPIaddSong() {
+    // this.setState({
+    //   isLoading: true,
+    // });
+    const { dataAlbum } = this.props;
+    const response = await addSong(dataAlbum);
+    this.setState({
+      isLoading: false,
+      addMusic: response,
+    });
   }
 
   render() {
     const { inputCheck, isLoading } = this.state;
-    const { previewUrl, artist, track, trackId } = this.props;
+    const { dataAlbum: { previewUrl, artist, track, trackId } } = this.props;
     return (
       <section className="track-container">
         {isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
@@ -69,7 +98,7 @@ class MusicCard extends Component {
               onInputChange={ this.handleChange }
               inputCheck={ inputCheck }
               name="inputCheck"
-              elementId="music-checkbox"
+              elementId={ trackId }
             />
           </>
         )}

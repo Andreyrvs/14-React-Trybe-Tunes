@@ -68,16 +68,13 @@ class Album extends Component {
           ))}
         </section>
         <section>
-          { albumMusic.map((artist, index) => (
+          { albumMusic.map((music, index) => (
             index !== 0 && (
               <>
                 <hr />
                 <MusicCard
-                  key={ artist.trackId }
-                  previewUrl={ artist.previewUrl }
-                  artist={ artist.collectionId }
-                  track={ artist.trackName }
-                  trackId={ artist.trackId }
+                  key={ music.trackId }
+                  dataAlbum={ music }
                 />
               </>
             )
