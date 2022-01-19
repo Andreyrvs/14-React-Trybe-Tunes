@@ -22,7 +22,6 @@ class MusicCard extends Component {
     this.setState({
       inputCheck: checked,
     }, () => this.callAPIaddSong());
-    console.log('chamou');
   }
 
   async callAPIaddSong() {
