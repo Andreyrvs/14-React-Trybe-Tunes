@@ -10,28 +10,20 @@ class MusicCard extends Component {
     super();
     this.callAPIaddSong = this.callAPIaddSong.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.getFavoriteSongsAPI = this.getFavoriteSongsAPI.bind(this);
-
     this.state = {
       inputCheck: false,
       isLoading: true,
-      addMusic: '',
-      getMusic: '',
     };
   }
 
   componentDidMount() {
+    /**
+    * Obtive ajuda das Pessoas Estudantes:
+    *  Rolwane - Turma 17,
+    *  [Ari] Aryeh Braid David - Turma 17,
+    * para resolver essa parte. Me ajudaram a desenvolver o Raciocinio na Salinha de estudos 03.
+    */
     const { dataAlbum: { trackId } } = this.props;
-    // getFavoriteSongs().then((response) => this.setState({
-    //   isLoading: false,
-    // }, () => {
-    //   if (response.some((el) => el.trackId === trackId)) {
-    //     this.setState({
-    //       inputCheck: true,
-    //     });
-    //   }
-    // }));
-
     getFavoriteSongs().then((response) => {
       const validadteCheck = response.some((el) => el.trackId === trackId);
       this.setState({
@@ -48,28 +40,13 @@ class MusicCard extends Component {
     }, () => this.callAPIaddSong());
   }
 
-  async getFavoriteSongsAPI() {
-    this.setState({
-      isLoading: true,
-    });
-
-    const response = await getFavoriteSongs();
+  async callAPIaddSong() {
+    const { dataAlbum } = this.props;
+    const response = await addSong(dataAlbum);
     console.log(response);
     this.setState({
       isLoading: false,
-      getMusic: response,
-    });
-  }
-
-  async callAPIaddSong() {
-    // this.setState({
-    //   isLoading: true,
-    // });
-    const { dataAlbum } = this.props;
-    const response = await addSong(dataAlbum);
-    this.setState({
-      isLoading: false,
-      addMusic: response,
+      // addMusic: response,
     });
   }
 
