@@ -5,6 +5,9 @@ class LoadingDots extends Component {
   render() {
     return (
       <section className="Body">
+        <div style={ { fontSize: '0.5px' } }>
+          Carregando...
+        </div>
         <div className="Dots" />
         <div className="Dots" />
         <div className="Dots" />

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header/Header';
 import MusicCard from '../../components/MusicCard/MusicCard';
-import Loading from '../../components/Loading/Loading';
+// import Loading from '../../components/Loading/Loading';
 import getMusics from '../../services/musicsAPI';
 import './album.css';
+import LoadingDots from '../../components/LoadingDots/LoadingDots';
 
 class Album extends Component {
   constructor() {
@@ -89,7 +90,7 @@ class Album extends Component {
     return (
       <div className="album-page" data-testid="page-album">
         <Header userName={ userName } />
-        {albumLoading ? <Loading style={ { fontSize: '64px' } } /> : (
+        {albumLoading ? <LoadingDots style={ { fontSize: '64px' } } /> : (
           this.renderAlbum()
         )}
       </div>

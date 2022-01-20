@@ -4,7 +4,8 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import { createUser } from '../../services/userAPI';
 import './login.css';
-import Loading from '../../components/Loading/Loading';
+// import Loading from '../../components/Loading/Loading';
+import LoadingDots from '../../components/LoadingDots/LoadingDots';
 
 const NAME_LENGTH = 3;
 
@@ -66,7 +67,7 @@ class Login extends Component {
 
     return (
       <div data-testid="page-login" className="login-page">
-        { isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
+        { isLoading ? <LoadingDots style={ { fontSize: '64px' } } /> : (
           <>
             <section className="logo-login" />
             <section className="card-container">

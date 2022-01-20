@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Header from '../../components/Header/Header';
 import Input from '../../components/Input';
-import Loading from '../../components/Loading/Loading';
+// import Loading from '../../components/Loading/Loading';
 import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 import AlbumNotFound from '../../components/AlbumNotFound';
 import './search.css';
+import LoadingDots from '../../components/LoadingDots/LoadingDots';
 
 const NAME_LENGTH = 2;
 
@@ -81,6 +82,7 @@ class Search extends Component {
                   alt={ artist.artistName }
                 />
               </Link>
+
               <span>
                 {artist.collectionName}
               </span>
@@ -128,7 +130,7 @@ class Search extends Component {
     return (
       <section data-testid="page-search" className="search-page">
         <Header />
-        {(searchLoading) ? <Loading style={ { fontSize: '64px' } } /> : (
+        {(searchLoading) ? <LoadingDots style={ { fontSize: '64px' } } /> : (
           <section className="search-container">
             <section className="form-album-container">
               {this.renderForm()}

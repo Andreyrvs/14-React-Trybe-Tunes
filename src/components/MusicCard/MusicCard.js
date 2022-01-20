@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import './musicCard.css';
 import Input from '../Input';
 import { addSong, getFavoriteSongs } from '../../services/favoriteSongsAPI';
-import Loading from '../Loading/Loading';
+// import Loading from '../Loading/Loading';
+import LoadingDots from '../LoadingDots/LoadingDots';
 
 class MusicCard extends Component {
   constructor() {
@@ -61,7 +62,7 @@ class MusicCard extends Component {
     const { dataAlbum: { previewUrl, artist, trackName, trackId } } = this.props;
     return (
       <section className="track-container">
-        {isLoading ? <Loading style={ { fontSize: '64px' } } /> : (
+        {isLoading ? <LoadingDots style={ { fontSize: '64px' } } /> : (
           <>
             <p className="track-name">{trackName}</p>
             <audio

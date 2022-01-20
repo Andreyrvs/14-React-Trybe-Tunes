@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import userDefault from '../../assets/default.png';
 import logoTrybe from '../../assets/logo-header.png';
 import { getUser } from '../../services/userAPI';
-import Loading from '../Loading/Loading';
+// import Loading from '../Loading/Loading';
+import LoadingDots from '../LoadingDots/LoadingDots';
 
 class Header extends Component {
   constructor() {
@@ -36,7 +37,7 @@ class Header extends Component {
     const { userName, isLoading } = this.state;
     return (
       <div className="header">
-        {isLoading ? <Loading /> : (
+        {isLoading ? <LoadingDots /> : (
 
           <header data-testid="header-component" className="header-container">
             <section className="header-content-container">
