@@ -32,6 +32,9 @@ Adquiri essas habilidades ao desenvolver esse projeto:
 
 - Criar links de navegação na aplicação com o componente Link;
 
+## Preview da Aplicação:
+
+
 ## Instalando Dependências
 
 - clone o projeto:
