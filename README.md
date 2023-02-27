@@ -10,7 +10,7 @@ Este projeto trata-se de uma aplicação capaz de reproduzir músicas das mais v
 ## Técnologias usadas
 
 Front-end:
-> Desenvolvido usando: React, Redux, CSS3, HTML5, Redis, ES6
+> Desenvolvido usando: React, Prop-Types, CSS3, JavaScript ES6, React Router
 
 ## Habilidades
 
@@ -39,13 +39,13 @@ Adquiri essas habilidades ao desenvolver esse projeto:
 
 ## Instalando Dependências
 
-- clone o projeto:
+- Clone o projeto:
 
   ```bash
   git clone git@github.com:Andreyrvs/14-React-Trybe-Tunes.git
   ```
 
-  > Frontend
+  > Front-end
 
   ```bash
   cd 14-React-Trybe-Tunes/
@@ -54,7 +54,7 @@ Adquiri essas habilidades ao desenvolver esse projeto:
 
 ## Executando aplicação
 
-- Para rodar o front-end:
+- Para rodar o Front-end:
 
   ```bash
   cd src/ && npm start
